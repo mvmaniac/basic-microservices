@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: service-license
+
+  profiles:
+    active: local
+
+  cloud:
+    config:
+      uri: http://localhost:8888
+
+encrypt:
+  key-store:
+    location: classpath:server.jks
+    alias: localkey
+    password: cDK37yBbM

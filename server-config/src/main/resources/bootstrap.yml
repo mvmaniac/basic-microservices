@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: server-config
+
+  cloud:
+    config:
+      server:
+        encrypt.enabled: false
+
+encrypt:
+  key-store:
+    location: classpath:server.jks
+    alias: localkey
+    password: cDK37yBbM

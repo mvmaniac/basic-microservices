@@ -1,0 +1,9 @@
+example:
+  property: "I AM THE LOCAL ORGANIZATION SERVICE"
+
+spring:
+  datasource:
+    initialization-mode: always
+    platform: postgres
+    schema: classpath:sql/schema-${spring.datasource.platform}.sql
+    data: classpath:sql/data-${spring.datasource.platform}.sql

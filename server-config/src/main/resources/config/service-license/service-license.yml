@@ -1,6 +1,9 @@
 example:
   property: "I AM THE DEFAULT LICENSE SERVICE"
 
+server:
+  port: 8081
+
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver

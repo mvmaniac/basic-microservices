@@ -25,7 +25,7 @@ public class LicenseController {
         return licenseService.getLicense(organizationId, licenseId);
     }
 
-    @PutMapping("{licenseId}")
+    @PutMapping("/{licenseId}")
     public String updateLicenses(@PathVariable("licenseId") String licenseId) {
         return "This is the put";
     }
@@ -36,7 +36,7 @@ public class LicenseController {
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @DeleteMapping("{licenseId}")
+    @DeleteMapping("/{licenseId}")
     public String deleteLicenses(@PathVariable("licenseId") String licenseId) {
         return "This is the Delete";
     }

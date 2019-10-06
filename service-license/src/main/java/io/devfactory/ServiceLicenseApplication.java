@@ -3,6 +3,7 @@ package io.devfactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -13,6 +14,7 @@ import org.springframework.web.client.RestTemplate;
 @RefreshScope
 @EnableDiscoveryClient // discoveryClient 를 사용 할 경우
 @EnableFeignClients // feignClient 를 사용 할 경우
+@EnableCircuitBreaker
 @SpringBootApplication
 public class ServiceLicenseApplication {
 

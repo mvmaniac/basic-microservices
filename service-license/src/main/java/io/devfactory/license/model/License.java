@@ -50,7 +50,6 @@ public class License {
 
     @Builder
     public License(String organizationId, String productName, String licenseType, int licenseMax, int licenseAllocated, String comment) {
-        System.out.println("License constructor call...!!!!!!!!!!!!!!!!!!!");
         this.organizationId = organizationId;
         this.productName = productName;
         this.licenseType = licenseType;
@@ -64,33 +63,8 @@ public class License {
         return this;
     }
 
-    public License withProductName(String productName){
-        this.productName = productName;
-        return this;
-    }
-
-    public License withLicenseType(String licenseType){
-        this.licenseType = licenseType;
-        return this;
-    }
-
-    public License withLicenseMax(Integer licenseMax){
-        this.licenseMax = licenseMax;
-        return this;
-    }
-
-    public License withLicenseAllocated(Integer licenseAllocated){
-        this.licenseAllocated = licenseAllocated;
-        return this;
-    }
-
     public License withComment(String comment){
         this.comment = comment;
-        return this;
-    }
-
-    public License withOrganizationId(String organizationId){
-        this.organizationId = organizationId;
         return this;
     }
 

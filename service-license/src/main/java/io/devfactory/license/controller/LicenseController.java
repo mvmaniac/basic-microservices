@@ -2,12 +2,15 @@ package io.devfactory.license.controller;
 
 import io.devfactory.license.model.License;
 import io.devfactory.license.service.LicenseService;
+import io.devfactory.license.utils.UserContextHolder;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Slf4j
 @RequiredArgsConstructor
 @RequestMapping("/v1/organizations/{organizationId}/licenses")
 @RestController
@@ -17,6 +20,7 @@ public class LicenseController {
 
     @GetMapping
     public List<License> getLicenses(@PathVariable("organizationId") String organizationId) {
+        log.debug("LicenseController Correlation id: {}", UserContextHolder.getContext().getCorrelationId());
         return licenseService.getLicensesByOrganizationId(organizationId);
     }
 

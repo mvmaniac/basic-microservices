@@ -7,3 +7,7 @@ spring:
     platform: postgres
     schema: classpath:sql/schema-${spring.datasource.platform}.sql
     data: classpath:sql/data-${spring.datasource.platform}.sql
+
+logging:
+  level:
+    io.devfactory: debug

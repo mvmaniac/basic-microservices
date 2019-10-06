@@ -13,3 +13,6 @@ eureka:
     fetch-registry: true # 유레카 서비스 위치
     service-url:
       defaultZone: http://localhost:8761/eureka # 레지스트리 사본을 로컬로 가져오기
+
+service:
+  organization: service-organization

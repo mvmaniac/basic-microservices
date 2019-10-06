@@ -12,4 +12,7 @@ public class ServiceConfig{
   @Value("${example.property}")
   private String exampleProperty;
 
+  @Value("${service.organization}")
+  private String serviceOrganizationId;
+
 }

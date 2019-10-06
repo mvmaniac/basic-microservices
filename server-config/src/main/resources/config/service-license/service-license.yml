@@ -1,3 +1,6 @@
+# TODO: config 폴더 아래에 있을 경우 자동완성 안되는 것
+# TODO: yml 중복 제거? include 사용?
+
 example:
   property: "I AM THE DEFAULT LICENSE SERVICE"
 
@@ -27,5 +30,3 @@ spring:
         max-active: 10
         max-idle: 10
         min-idle: 2
-
-#signing.key: "345345fsdfsf5345"

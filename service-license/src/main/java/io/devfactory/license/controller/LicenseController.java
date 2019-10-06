@@ -17,27 +17,39 @@ public class LicenseController {
 
     @GetMapping
     public List<License> getLicenses(@PathVariable("organizationId") String organizationId) {
-        return licenseService.getLicensesByOrg(organizationId);
+        return licenseService.getLicensesByOrganizationId(organizationId);
     }
 
     @GetMapping("/{licenseId}")
-    public License getLicenses(@PathVariable("organizationId") String organizationId, @PathVariable("licenseId") String licenseId) {
-        return licenseService.getLicense(organizationId, licenseId);
+    public License getLicense(
+            @PathVariable("organizationId") String organizationId,
+            @PathVariable("licenseId") String licenseId) {
+
+        return licenseService.getLicense(organizationId, licenseId, "");
+    }
+
+    @GetMapping("/{licenseId}/{clientType}")
+    public License getLicense(
+            @PathVariable("organizationId") String organizationId,
+            @PathVariable("licenseId") String licenseId,
+            @PathVariable("clientType") String clientType) {
+
+        return licenseService.getLicense(organizationId, licenseId, clientType);
     }
 
     @PutMapping("/{licenseId}")
-    public String updateLicenses(@PathVariable("licenseId") String licenseId) {
+    public String updateLicense(@PathVariable("licenseId") String licenseId) {
         return "This is the put";
     }
 
     @PostMapping
-    public void saveLicenses(@RequestBody License license) {
+    public void saveLicense(@RequestBody License license) {
         licenseService.saveLicense(license);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{licenseId}")
-    public String deleteLicenses(@PathVariable("licenseId") String licenseId) {
+    public String deleteLicense(@PathVariable("licenseId") String licenseId) {
         return "This is the Delete";
     }
 

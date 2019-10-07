@@ -1,0 +1,16 @@
+example:
+  property: "I AM THE LOCAL ORGANIZATION SERVICE"
+
+server:
+  port: 8087
+
+spring:
+  datasource:
+    initialization-mode: always
+    platform: postgres
+    schema: classpath:sql/schema-${spring.datasource.platform}.sql
+    data: classpath:sql/data-${spring.datasource.platform}.sql
+
+logging:
+  level:
+    io.devfactory: debug

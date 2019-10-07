@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Slf4j
@@ -27,8 +28,10 @@ public class LicenseController {
     @GetMapping("/{licenseId}")
     public License getLicense(
             @PathVariable("organizationId") String organizationId,
-            @PathVariable("licenseId") String licenseId) {
+            @PathVariable("licenseId") String licenseId,
+            HttpServletRequest request) {
 
+        log.debug("Found tmx-correlation-id in getLicense: {} ", request.getHeader("tmx-correlation-id"));
         return licenseService.getLicense(organizationId, licenseId, "");
     }
 

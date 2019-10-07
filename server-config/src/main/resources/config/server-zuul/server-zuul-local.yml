@@ -1,0 +1,13 @@
+#hystrix:
+#  command:
+#    default:
+#      execution.isolation.thread.timeoutInMilliseconds: 5000
+#    service-license:
+#      execution.isolation.thread.timeoutInMilliseconds: 7000
+#
+#service-license:
+#  ribbon.ReadTimeout: 7000
+
+logging:
+  level:
+    io.devfactory: debug

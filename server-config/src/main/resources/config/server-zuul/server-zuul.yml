@@ -1,0 +1,24 @@
+server:
+  port: 5555
+
+zuul:
+  sensitive-headers: Cookie, Set-Cookie
+  prefix: /api
+  # * 로 설정하면 eureka 서비스 ID 가빈의 모든 경로 등록을 제외한다
+  ignored-services: "*"
+  routes:
+    # 수동 경로 매핑
+    service-organization: /organization/**
+    service-license: /license/**
+
+    # 정적 매핑
+    #    service-license-static:
+    #      path: /license-static/**
+    #      url: http://service-license-static:8081
+    #      service-id: service-license-static
+    #      ribbon:
+    #        list-of-servers: http://service-license-static:8081, http://service-license-static:8082
+    #
+    #ribbon:
+    #  eureka:
+    #    enabled: false

@@ -62,7 +62,6 @@ public class LicenseService {
 //            }
     )
     public License getLicense(String organizationId, String licenseId, String clientType) {
-
         License license = licenseRepository.findByOrganizationIdAndLicenseId(organizationId, licenseId);
         license.withComment(config.getExampleProperty());
 

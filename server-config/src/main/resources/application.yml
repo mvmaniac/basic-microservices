@@ -10,7 +10,11 @@ spring:
     config:
       server:
         native:
-          search-locations: classpath:config/service-license, classpath:config/service-organization
+          search-locations:
+            classpath:config/server-zuul,
+            classpath:config/service-license,
+            classpath:config/service-organization,
+            classpath:config/service-special-route
 
 eureka:
   instance:

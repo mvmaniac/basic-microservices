@@ -14,5 +14,5 @@ eureka:
       defaultZone: http://localhost:${server.port}/eureka
 
   server:
-    wait-time-in-ms-when-sync-empty: 5 #  5분, 서버가 요청을 받기 전 대기할 초기 시간 (로컬 테스트용)
-    enable-self-preservation: false # 자기보호 설정 해제 (로컬 테스트용)
+    # wait-time-in-ms-when-sync-empty: 60000 # 1분
+    enable-self-preservation: false # 자기보호 설정 해제

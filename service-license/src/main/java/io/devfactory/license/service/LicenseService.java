@@ -3,6 +3,7 @@ package io.devfactory.license.service;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import io.devfactory.license.clients.OrganizationDiscoveryClient;
+import io.devfactory.license.clients.OrganizationOAuth2RestTemplateClient;
 import io.devfactory.license.clients.OrganizationRestTemplateClient;
 import io.devfactory.license.clients.OrganizationFeignClient;
 import io.devfactory.license.config.ServiceConfig;
@@ -24,8 +25,9 @@ public class LicenseService {
     private final LicenseRepository licenseRepository;
 
     private final OrganizationDiscoveryClient discoveryClient;
-    private final OrganizationFeignClient restTemplateClient;
-    private final OrganizationRestTemplateClient feignClient;
+    private final OrganizationFeignClient feignClient;
+    private final OrganizationOAuth2RestTemplateClient oauth2RestTemplateClient;
+    private final OrganizationRestTemplateClient restTemplateClient;
 
     private final ServiceConfig config;
 
@@ -66,7 +68,7 @@ public class LicenseService {
         license.withComment(config.getExampleProperty());
 
         // 시간 지연 테스트 코드
-        randomlyRunLong();
+        //randomlyRunLong();
 
         return retrieveOrganizationInfo(organizationId, clientType)
                 .map(license::withOrganization).orElse(license);
@@ -94,7 +96,8 @@ public class LicenseService {
         switch (clientType) {
             case "feign":
                 log.debug("I am using the feign client");
-                organization = feignClient.getOrganization(organizationId);
+                String authToken = UserContextHolder.getContext().getAuthToken();
+                organization = feignClient.getOrganization(authToken, organizationId);
                 break;
 
             case "rest":
@@ -105,6 +108,11 @@ public class LicenseService {
             case "discovery":
                 log.debug("I am using the discovery client");
                 organization = discoveryClient.getOrganization(organizationId);
+                break;
+
+            case "auth2":
+                log.debug("I am using the oauth2 rest client");
+                organization = oauth2RestTemplateClient.getOrganization(organizationId);
                 break;
 
             default:

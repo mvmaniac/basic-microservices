@@ -6,6 +6,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class FilterUtils {
 
+    // TODO: 다른 모듈의 AUTH_TOKEN 를 AUTHORIZATION 로 대체
+    public static final String AUTHORIZATION = "Authorization";
+
     public static final String CORRELATION_ID = "tmx-correlation-id";
     public static final String AUTH_TOKEN = "tmx-auth-token";
     public static final String USER_ID = "tmx-user-id";
@@ -58,9 +61,23 @@ public class FilterUtils {
         ctx.addZuulRequestHeader(USER_ID, userId);
     }
 
+    public final String getAuthorizationToken() {
+        RequestContext ctx = RequestContext.getCurrentContext();
+        return ctx.getRequest().getHeader(AUTHORIZATION);
+    }
+
     public final String getAuthToken() {
         RequestContext ctx = RequestContext.getCurrentContext();
-        return ctx.getRequest().getHeader(AUTH_TOKEN);
+        if (ctx.getRequest().getHeader(AUTH_TOKEN) != null) {
+            return ctx.getRequest().getHeader(AUTH_TOKEN);
+        } else {
+            return ctx.getZuulRequestHeaders().get(AUTH_TOKEN);
+        }
+    }
+
+    public final void setAuthToken(String authToken) {
+        RequestContext ctx = RequestContext.getCurrentContext();
+        ctx.addZuulRequestHeader(AUTH_TOKEN, authToken);
     }
 
     public String getServiceId() {

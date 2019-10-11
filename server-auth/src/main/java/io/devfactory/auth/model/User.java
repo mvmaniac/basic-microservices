@@ -1,6 +1,7 @@
 package io.devfactory.auth.model;
 
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -11,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @NoArgsConstructor
+@Getter
 @Entity
 @Table(name = "users")
 public class User {

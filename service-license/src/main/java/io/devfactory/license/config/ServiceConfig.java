@@ -12,7 +12,13 @@ public class ServiceConfig{
   @Value("${example.property}")
   private String exampleProperty;
 
+  @Value("${signing.key}")
+  private String signingKey;
+
   @Value("${service.organization}")
   private String serviceOrganizationId;
+
+  @Value("${service.zuul.organization}")
+  private String serviceZuulOrganizationUrl;
 
 }

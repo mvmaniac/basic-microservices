@@ -17,17 +17,17 @@ public class OrganizationService {
         return orgRepository.findById(organizationId).orElseThrow(() -> new NullPointerException("organizationId: " + organizationId));
     }
 
-    public void saveOrganization(Organization org){
-        org.withId(UUID.randomUUID().toString());
-        orgRepository.save(org);
+    public void saveOrganization(Organization organization){
+        organization.withId(UUID.randomUUID().toString());
+        orgRepository.save(organization);
     }
 
-    public void updateOrganization(Organization org){
-        orgRepository.save(org);
+    public void updateOrganization(Organization organization){
+        orgRepository.save(organization);
     }
 
-    public void deleteOrganization(Organization org){
-        orgRepository.delete(org);
+    public void deleteOrganization(String organizationId){
+        orgRepository.deleteById(organizationId);
     }
 
 }

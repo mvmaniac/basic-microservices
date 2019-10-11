@@ -22,8 +22,8 @@ public class UserContextFilter extends GenericFilterBean {
 
         UserContextHolder.getContext().setInfo(
                 httpServletRequest.getHeader(UserContext.CORRELATION_ID),
-                httpServletRequest.getHeader(UserContext.USER_ID),
                 httpServletRequest.getHeader(UserContext.AUTH_TOKEN),
+                httpServletRequest.getHeader(UserContext.USER_ID),
                 httpServletRequest.getHeader(UserContext.ORG_ID)
         );
 

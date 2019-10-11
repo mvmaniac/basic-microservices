@@ -22,3 +22,5 @@ zuul:
     #ribbon:
     #  eureka:
     #    enabled: false
+
+signing.key: "345345fsdfsf5345"

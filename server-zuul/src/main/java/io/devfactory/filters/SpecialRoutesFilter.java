@@ -39,13 +39,14 @@ import java.util.Map;
 import java.util.Random;
 
 // TODO: ProxyRequestHelper 대체 및 SpecialRoute 로 명칭 변경
+// TODO: server-auth 떄문에 일단 SHOULD_FILTER 값을 false 로 함
 @Slf4j
 @RequiredArgsConstructor
 @Component
 public class SpecialRoutesFilter extends ZuulFilter {
 
     private static final int FILTER_ORDER = 1;
-    private static final boolean SHOULD_FILTER = true;
+    private static final boolean SHOULD_FILTER = false;
 
     private final FilterUtils filterUtils;
     private final RestTemplate restTemplate;

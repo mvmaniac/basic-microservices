@@ -2,7 +2,7 @@ spring:
   datasource:
     platform: postgres
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://192.168.0.24:8432/postgres_prod
+    url: jdbc:postgresql://192.168.0.6:8432/postgres_prod
     username: postgres_prod
     password: "{cipher}4788dfe1ccbe6485934aec2ffeddb06163ea3d616df5fd75be96aadd4df1da91"
 

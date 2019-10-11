@@ -23,19 +23,19 @@ public class OrganizationController {
 
     @RequestMapping(value = "/{organizationId}", method = RequestMethod.PUT)
     @PutMapping("/{organizationId}")
-    public void updateOrganization(@PathVariable("organizationId") String organizationId, @RequestBody Organization org) {
-        organizationService.updateOrganization(org);
+    public void updateOrganization(@PathVariable("organizationId") String organizationId, @RequestBody Organization organization) {
+        organizationService.updateOrganization(organization);
     }
 
     @PostMapping()
-    public void saveOrganization(@RequestBody Organization org) {
-        organizationService.saveOrganization(org);
+    public void saveOrganization(@RequestBody Organization organization) {
+        organizationService.saveOrganization(organization);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{organizationId}")
-    public void deleteOrganization(@PathVariable("organizationId") String organizationId, @RequestBody Organization org) {
-        organizationService.deleteOrganization(org);
+    public void deleteOrganization(@PathVariable("organizationId") String organizationId) {
+        organizationService.deleteOrganization(organizationId);
     }
 
 }

@@ -4,7 +4,7 @@ server:
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://192.168.0.24:8432/postgres_local
+    url: jdbc:postgresql://192.168.0.6:8432/postgres_local
     username: postgres_local
     password: "{cipher}AgBz4Q8k+sJfJc2WD6CT10YeGIwTeXookA/RZ154TCBkHiizMiIVez3ScyLu0fL7WG6GMBdL7Z7zL+o+6Ihc0gttTTFRsIEEEVR3MP+IEPlz9mKc3hUBlHWywDJPnke7JR8mUT93oJUP2zDaUHEQdGmONzlS5yJHVtNDNy7ECYRd7LTSgCrTSzypttd7tr1fLkoMMtyC8sIfwncdrR/g+LXM4WdXuC5hYPXOUqQi+nVscMv5AVgRDw5NKndYaMctH/Bv3RNoYULZCCabe2FrbSFBHDfNo9/FI/TwfCCQ+oiYgk+reRDyY7mkg7PcQ4ANd2GS7KHVIxHvcVPcVRSnfPv/XQB+6hCZ63Oh8MLlcykyyIf2eLQ8kxHy1sANtuAlLuUldGBDNDx04HiCZ33YnFKhKpqRLQUAD6S86L1VSc9qDRAhS5VO4/qIwvXMz5QqKCTwoDkK2ou/qNA10lSO4VWgdrUCJ/T62buMSzo5+OmNp0NdhgER4/Xse51pMjyXMr1yZ+wWIsfFnnlQV4aH/7e0Pr96YyghhmFpXna2e131ks7guiN0ytoVL6BGu0ixfY5hs6kBq+XqmV5CCSt1GBfJMi5rOOxjK29kfqpOnI6cOOv8+nA6WqwzoUzyGqKax+f6VDlsqKx/8kgXhsCSLYvDg/BET5Uae5FWYqBiC12cc2npnGPxoT4VoBT1VlPwMQgz7TAfGPAmVzjtq1IDmDTj"
 

@@ -20,7 +20,7 @@ public class UserContextInterceptor implements ClientHttpRequestInterceptor {
         String authToken = UserContextHolder.getContext().getAuthToken();
 
         httpHeaders.add(UserContext.CORRELATION_ID, correlationId);
-        httpHeaders.add(UserContext.AUTH_TOKEN, authToken);
+        httpHeaders.add("Authorization", authToken);
 
         log.debug("UserContextInterceptor Correlation id: {}, AuthToken: {}", correlationId, authToken);
 

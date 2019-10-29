@@ -25,7 +25,7 @@ public class AbTestingRoute {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.JSON_STYLE)
+        return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
                 .append("serviceName", serviceName)
                 .append("active", active)
                 .append("endpoint", endpoint)

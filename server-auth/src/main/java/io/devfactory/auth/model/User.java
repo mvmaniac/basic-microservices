@@ -36,7 +36,7 @@ public class User {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.JSON_STYLE)
+        return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
                 .append("userName", userName)
                 .append("password", password)
                 .append("enabled", enabled)

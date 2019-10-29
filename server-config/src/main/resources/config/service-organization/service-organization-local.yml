@@ -8,6 +8,16 @@ spring:
     schema: classpath:sql/schema-${spring.datasource.platform}.sql
     data: classpath:sql/data-${spring.datasource.platform}.sql
 
+  cloud:
+    stream:
+      bindings:
+        output:
+          destination: organizationChangeTopic
+          content-type: application/json
+      kafka:
+        binder:
+          brokers: 192.168.0.6
+
 logging:
   level:
     io.devfactory: debug

@@ -1,40 +1,37 @@
-package io.devfactory.auth.model;
+package io.devfactory.events.model;
 
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
 @NoArgsConstructor
 @Getter
-@Entity
-@Table(name = "user_organizations")
-public class UserOrganization {
+@Setter
+public class OrganizationChangeModel {
 
-    @Id
-    @Column(name = "user_name", nullable = false)
-    private String userName;
-
-    @Column(name = "organization_id", nullable = false)
+    private String type;
+    private String action;
     private String organizationId;
+    private String correlationId;
 
     @Builder
-    public UserOrganization(String userName, String organizationId) {
-        this.userName = userName;
+    public OrganizationChangeModel(String type, String action, String organizationId, String correlationId) {
+        this.type = type;
+        this.action = action;
         this.organizationId = organizationId;
+        this.correlationId = correlationId;
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-                .append("userName", userName)
+                .append("type", type)
+                .append("action", action)
                 .append("organizationId", organizationId)
+                .append("correlationId", correlationId)
                 .toString();
     }
 

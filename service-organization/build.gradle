@@ -5,6 +5,7 @@ dependencies {
 
     compileOnly 'org.postgresql:postgresql:42.2.8'
 
+    implementation 'org.springframework.cloud:spring-cloud-stream-binder-kafka'
     implementation 'org.springframework.cloud:spring-cloud-starter-oauth2'
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-hystrix'
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'

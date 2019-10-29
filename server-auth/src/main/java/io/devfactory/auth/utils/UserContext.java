@@ -7,6 +7,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.stereotype.Component;
 
 @NoArgsConstructor
+@Getter
 @Component
 public class UserContext {
 
@@ -15,16 +16,9 @@ public class UserContext {
     public static final String USER_ID = "tmx-user-id";
     public static final String ORG_ID = "tmx-org-id";
 
-    @Getter
     private String correlationId;
-
-    @Getter
     private String authToken;
-
-    @Getter
     private String userId;
-
-    @Getter
     private String orgId;
 
     public void setInfo(String correlationId, String authToken, String userId, String orgId) {
@@ -36,7 +30,7 @@ public class UserContext {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.JSON_STYLE)
+        return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
                 .append("correlationId", correlationId)
                 .append("authToken", authToken)
                 .append("userId", userId)

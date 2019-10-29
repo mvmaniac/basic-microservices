@@ -10,6 +10,9 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.cloud.stream.annotation.EnableBinding;
+import org.springframework.cloud.stream.messaging.Sink;
+import org.springframework.cloud.stream.messaging.Source;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
@@ -22,6 +25,7 @@ import java.util.Collections;
 import java.util.List;
 
 @RefreshScope
+@EnableBinding({Sink.class})
 @EnableDiscoveryClient // discoveryClient 를 사용 할 경우
 @EnableFeignClients // feignClient 를 사용 할 경우
 @EnableCircuitBreaker

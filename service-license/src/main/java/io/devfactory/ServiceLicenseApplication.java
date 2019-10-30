@@ -25,7 +25,6 @@ import java.util.Collections;
 import java.util.List;
 
 @RefreshScope
-@EnableBinding({Sink.class})
 @EnableDiscoveryClient // discoveryClient 를 사용 할 경우
 @EnableFeignClients // feignClient 를 사용 할 경우
 @EnableCircuitBreaker

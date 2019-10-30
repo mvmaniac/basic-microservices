@@ -17,6 +17,7 @@ spring:
       kafka:
         binder:
           brokers: 192.168.0.6
+          default-broker-port: 9092
 
 logging:
   level:

@@ -11,13 +11,21 @@ spring:
   cloud:
     stream:
       bindings:
-        input:
+#        input:
+#          destination: organizationChangeTopic
+#          content-type: application/json
+#          group: licensingGroup
+        inboundOrganizationChange:
           destination: organizationChangeTopic
           content-type: application/json
           group: licensingGroup
       kafka:
         binder:
           brokers: 192.168.0.6
+
+  redis:
+    host: 192.168.0.6
+    port: 8379
 
 logging:
   level:

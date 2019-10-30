@@ -1,4 +1,4 @@
-package io.devfactory.events.model;
+package io.devfactory.license.events.model;
 
 import lombok.Builder;
 import lombok.Getter;

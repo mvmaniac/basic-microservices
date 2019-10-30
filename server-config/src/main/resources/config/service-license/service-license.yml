@@ -23,7 +23,7 @@ spring:
       hibernate.temp.use_jdbc_metadata_defaults: false
 
   redis:
-    host: 192.168.0.24
+    host: 192.168.0.6
     port: 8379
     lettuce:
       pool:

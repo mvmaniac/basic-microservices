@@ -22,10 +22,16 @@ spring:
       kafka:
         binder:
           brokers: 192.168.0.6
-
   redis:
     host: 192.168.0.6
     port: 8379
+
+  sleuth:
+    sampler:
+      probability: 1
+
+  zipkin:
+    base-url: http://192.168.0.6:9411
 
 logging:
   level:

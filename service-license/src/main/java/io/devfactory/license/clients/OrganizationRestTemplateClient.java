@@ -1,5 +1,8 @@
 package io.devfactory.license.clients;
 
+import brave.Span;
+import brave.Tracer;
+import brave.Tracer.SpanInScope;
 import io.devfactory.license.config.ServiceConfig;
 import io.devfactory.license.model.Organization;
 import io.devfactory.license.repository.OrganizationRedisRepository;
@@ -19,6 +22,8 @@ public class OrganizationRestTemplateClient {
     private final RestTemplate restTemplate;
 
     private final OrganizationRedisRepository organizationRedisRepository;
+
+    private final Tracer tracer;
 
     private final ServiceConfig config;
 
@@ -49,11 +54,18 @@ public class OrganizationRestTemplateClient {
     }
 
     private Organization checkRedisCache(String organizationId) {
-        try {
+
+        Span newSpan = tracer.nextSpan().name("readLicenseDataFromRedis");
+
+        try(SpanInScope spanInScope = tracer.withSpanInScope(newSpan.start())) {
             return organizationRedisRepository.findById(organizationId).orElse(new Organization());
         } catch (Exception e) {
             log.error("Error encountered while trying to retrieve organization {} check Redis Cache. Exception {}", organizationId, e);
             return new Organization();
+        } finally {
+            newSpan.tag("peer.service", "redis");
+            newSpan.annotate("cr");
+            newSpan.finish();
         }
     }
 

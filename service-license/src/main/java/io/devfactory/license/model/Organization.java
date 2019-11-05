@@ -8,8 +8,6 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.redis.core.RedisHash;
 
-import javax.persistence.GeneratedValue;
-
 // TODO: 공통으로 쓸 수 있는 방법? service-organization 과 다른 서비스에서도 같이?
 @NoArgsConstructor
 @Getter
@@ -17,7 +15,7 @@ import javax.persistence.GeneratedValue;
 public class Organization {
 
     @Id
-    private String organizationId;
+    private String organizationId; // javax.persistence.Id 로 하려면 변수명도 Id 이여야 함...
     private String name;
     private String contactName;
     private String contactEmail;

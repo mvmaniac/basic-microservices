@@ -1,5 +1,8 @@
 package io.devfactory.organization.service;
 
+import brave.Span;
+import brave.Tracer;
+import brave.Tracer.SpanInScope;
 import io.devfactory.organization.events.source.SimpleSourceBean;
 import io.devfactory.organization.model.Organization;
 import io.devfactory.organization.repository.OrganizationRepository;
@@ -16,8 +19,19 @@ public class OrganizationService {
 
     private final SimpleSourceBean simpleSourceBean;
 
+    private final Tracer tracer;
+
     public Organization getOrganization(String organizationId) {
-        return orgRepository.findById(organizationId).orElseThrow(() -> new NullPointerException("organizationId: " + organizationId));
+
+        Span newSpan = tracer.nextSpan().name("getOrganizationByDB");
+
+        try (SpanInScope spanInScope = tracer.withSpanInScope(newSpan.start())) {
+            return orgRepository.findById(organizationId).orElseThrow(() -> new NullPointerException("organizationId: " + organizationId));
+        } finally {
+            newSpan.tag("peer.service", "postgres");
+            newSpan.annotate("cr");
+            newSpan.finish();
+        }
     }
 
     public void saveOrganization(Organization organization){

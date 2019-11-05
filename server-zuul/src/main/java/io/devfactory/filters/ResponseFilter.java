@@ -1,5 +1,6 @@
 package io.devfactory.filters;
 
+import brave.Tracer;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +16,7 @@ public class ResponseFilter extends ZuulFilter {
     private static final boolean SHOULD_FILTER = true;
 
     private final FilterUtils filterUtils;
+    private final Tracer tracer;
 
     @Override
     public String filterType() {
@@ -35,9 +37,12 @@ public class ResponseFilter extends ZuulFilter {
     public Object run() {
         RequestContext ctx = RequestContext.getCurrentContext();
 
-        log.debug("Adding the correlation id to the outbound headers. {}", filterUtils.getCorrelationId());
+        //log.debug("Adding the correlation id to the outbound headers. {}", filterUtils.getCorrelationId());
+        log.debug("Adding the correlation id to the outbound headers. {}", tracer.currentSpan().context().traceIdString());
 
-        ctx.getResponse().addHeader(FilterUtils.CORRELATION_ID, filterUtils.getCorrelationId());
+        //ctx.getResponse().addHeader(FilterUtils.CORRELATION_ID, filterUtils.getCorrelationId());
+        ctx.getResponse().addHeader(FilterUtils.CORRELATION_ID, tracer.currentSpan().context().traceIdString());
+
 
         log.debug("Completing outgoing request for {}.", ctx.getRequest().getRequestURI());
 

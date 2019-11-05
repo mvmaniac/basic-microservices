@@ -19,6 +19,13 @@ spring:
           brokers: 192.168.0.6
           default-broker-port: 9092
 
+  sleuth:
+    sampler:
+      probability: 1
+
+  zipkin:
+    base-url: http://192.168.0.6:9411
+
 logging:
   level:
     io.devfactory: debug

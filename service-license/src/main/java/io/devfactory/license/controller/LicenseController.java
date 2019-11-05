@@ -45,8 +45,8 @@ public class LicenseController {
     }
 
     @PutMapping("/{licenseId}")
-    public String updateLicense(@PathVariable("licenseId") String licenseId) {
-        return "This is the put";
+    public void updateLicense(@PathVariable("licenseId") String licenseId, @RequestBody License license) {
+        licenseService.updateLicense(license);
     }
 
     @PostMapping
@@ -56,8 +56,8 @@ public class LicenseController {
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{licenseId}")
-    public String deleteLicense(@PathVariable("licenseId") String licenseId) {
-        return "This is the Delete";
+    public void deleteLicense(@PathVariable("licenseId") String licenseId) {
+        licenseService.deleteLicense(licenseId);
     }
 
 }

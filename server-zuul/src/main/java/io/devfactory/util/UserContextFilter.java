@@ -1,4 +1,4 @@
-package io.devfactory.utils;
+package io.devfactory.util;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

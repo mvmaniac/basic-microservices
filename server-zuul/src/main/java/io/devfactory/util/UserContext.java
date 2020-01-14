@@ -1,4 +1,4 @@
-package io.devfactory.utils;
+package io.devfactory.util;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

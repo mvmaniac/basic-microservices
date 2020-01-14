@@ -1,7 +1,6 @@
 package io.devfactory;
 
-import io.devfactory.utils.UserContextInterceptor;
-import org.springframework.beans.factory.annotation.Qualifier;
+import io.devfactory.util.UserContextInterceptor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;

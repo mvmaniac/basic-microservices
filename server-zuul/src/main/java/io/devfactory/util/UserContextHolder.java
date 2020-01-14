@@ -1,4 +1,4 @@
-package io.devfactory.utils;
+package io.devfactory.util;
 
 import org.springframework.util.Assert;
 import org.springframework.util.ObjectUtils;

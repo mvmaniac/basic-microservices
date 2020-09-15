@@ -1,6 +1,6 @@
 # Basic Microservices
 
-### 1. 스프링 마이크로서비스 코딩 공작소 책 실습 예제 기반
+### 1. 책 실습 예제 기반
 
 * [스프링 마이크로서비스 코딩 공작소](https://kyobobook.co.kr/product/detailViewKor.laf?mallGb=KOR&ejkGb=KOR&barcode=9791160506815&orderClick=JAj "스프링 마이크로서비스 코딩 공작소") 참고
 

@@ -1,1 +1,0 @@
-INSERT INTO special_route (service_name, active,  endpoint, weight) VALUES ('service-organization', 'Y', 'http://service-organization-new:8087', 5);

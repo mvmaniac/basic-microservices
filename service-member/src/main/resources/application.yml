@@ -1,0 +1,19 @@
+server:
+  port: 0
+
+spring:
+  application:
+    name: service-member
+
+logging:
+  level:
+    io.devfactory: debug
+
+eureka:
+  instance:
+    instance-id: ${spring.cloud.client.hostname}:${spring.application.instance-id:${random.value}}
+  client:
+    register-with-eureka: true # 유레카 서비스 등록
+    fetch-registry: true # 유레카 레지스트리 정보를 가져옴
+    service-url:
+      defaultZone: http://127.0.0.1:8761/eureka

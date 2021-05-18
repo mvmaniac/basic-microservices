@@ -2,14 +2,14 @@ package io.devfactory;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
-@EnableEurekaServer
+@EnableDiscoveryClient
 @SpringBootApplication
-public class ServerEurekaApplication {
+public class ServiceMemberApplication {
 
   public static void main(String[] args) {
-    SpringApplication.run(ServerEurekaApplication.class, args);
+    SpringApplication.run(ServiceMemberApplication.class, args);
   }
 
 }

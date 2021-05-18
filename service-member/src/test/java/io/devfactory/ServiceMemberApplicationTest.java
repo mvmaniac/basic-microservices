@@ -5,7 +5,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SuppressWarnings("squid:S2699")
 @SpringBootTest
-class ServerEurekaApplicationTest {
+class ServiceMemberApplicationTest {
 
   @Test
   void contextLoads() {

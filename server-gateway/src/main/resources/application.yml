@@ -1,0 +1,49 @@
+server:
+  port: 8000
+
+spring:
+  application:
+    name: server-gateway
+
+  cloud:
+    inetutils:
+      ignored-interfaces:
+        - eth1*
+    gateway:
+      default-filters:
+        - name: ExampleGlobalFilter
+          args:
+            baseMessage: Spring Cloud Gatweay Global Filter
+            preLogger: true
+            postLogger: true
+      routes:
+        - id: first-service
+          uri: lb://FIRST-SERVICE
+          predicates:
+            - Path=/first-service/**
+          filters:
+#            - AddRequestHeader=first-request, first-request-header-yaml
+#            - AddResponseHeader=first-response, first-response-header-yaml
+            - ExampleCustomFilter
+        - id: second-service
+          uri: lb://SECOND-SERVICE
+          predicates:
+            - Path=/second-service/**
+          filters :
+#            - AddRequestHeader=second-request, second-request-header-yaml
+#            - AddResponseHeader=second-response, second-response-header-yaml
+            - name: ExampleCustomFilter
+            - name: ExampleSecondFilter
+              args :
+                baseMessage : Spring Cloud Gatweay Second Filter
+                preLogger : true
+                postLogger : true
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://127.0.0.1:8761/eureka

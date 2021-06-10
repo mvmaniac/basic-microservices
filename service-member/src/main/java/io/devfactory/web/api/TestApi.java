@@ -1,4 +1,4 @@
-package io.devfactory;
+package io.devfactory.web.api;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.env.Environment;
@@ -10,11 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 
 @Slf4j
 @RestController
-public class ServiceTestApi {
+public class TestApi {
 
   private final Environment environment;
 
-  public ServiceTestApi(Environment environment) {
+  public TestApi(Environment environment) {
     this.environment = environment;
   }
 

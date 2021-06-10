@@ -24,10 +24,10 @@ public class MemberApplicationRunner implements ApplicationRunner {
   public void run(ApplicationArguments args) {
     log.debug("[dev] spring.application.name: {}", applicationName);
     
-    final var vmCustom = environment.getProperty("vm.custom");
+    final var vmCustom= environment.getProperty("vm.custom");
     log.debug("[dev] vm.custom: {}", vmCustom);
 
-    final var progCustom = args.getOptionValues("prog.custom");
+    final var progCustom= args.getOptionValues("prog.custom");
     log.debug("[dev] prog.custom: {}", progCustom);
   }
 

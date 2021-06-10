@@ -29,15 +29,15 @@ spring:
           uri: lb://SECOND-SERVICE
           predicates:
             - Path=/second-service/**
-          filters :
+          filters:
 #            - AddRequestHeader=second-request, second-request-header-yaml
 #            - AddResponseHeader=second-response, second-response-header-yaml
             - name: ExampleCustomFilter
             - name: ExampleSecondFilter
-              args :
-                baseMessage : Spring Cloud Gatweay Second Filter
-                preLogger : true
-                postLogger : true
+              args:
+                baseMessage: Spring Cloud Gatweay Second Filter
+                preLogger: true
+                postLogger: true
 
 eureka:
   instance:
@@ -46,4 +46,4 @@ eureka:
     register-with-eureka: true
     fetch-registry: true
     service-url:
-      defaultZone: http://127.0.0.1:8761/eureka
+      defaultZone: http://localhost:8761/eureka

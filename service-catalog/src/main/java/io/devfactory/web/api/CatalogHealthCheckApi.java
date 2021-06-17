@@ -5,19 +5,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RequestMapping("/service-member")
+@RequestMapping("/service-catalog")
 @RestController
-public class MemberHealthCheckApi {
+public class CatalogHealthCheckApi {
 
   private final Environment environment;
 
-  public MemberHealthCheckApi(Environment environment) {
+  public CatalogHealthCheckApi(Environment environment) {
     this.environment = environment;
   }
 
   @GetMapping("/health-check")
   public String statusA() {
-    return String.format("It's Working in member service on PORT: %s", environment.getProperty("local.server.port"));
+    return String.format("It's Working in catalog service on PORT: %s", environment.getProperty("local.server.port"));
   }
 
 }

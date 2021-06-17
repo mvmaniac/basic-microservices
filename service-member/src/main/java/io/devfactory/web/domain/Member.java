@@ -21,7 +21,7 @@ public class Member extends BaseTimeEntity {
   private Long id;
 
   @Column(nullable = false, length = 50, unique = true)
-  private String userId;
+  private String uniqueId;
 
   @Column(nullable = false, length = 50, unique = true)
   private String email;
@@ -33,19 +33,19 @@ public class Member extends BaseTimeEntity {
   private String password;
 
   @Builder
-  private Member(String userId, String email, String name, String password) {
-    this.userId = userId;
+  private Member(String uniqueId, String email, String name, String password) {
+    this.uniqueId = uniqueId;
     this.email = email;
     this.name = name;
     this.password = password;
   }
 
-  public void updatePassword(String encryptedPassword) {
+  public void encryptPassword(String encryptedPassword) {
     this.password = encryptedPassword;
   }
 
-  public void updateUserId(String userId) {
-    this.userId = userId;
+  public void updateUniqueId(String uniqueId) {
+    this.uniqueId = uniqueId;
   }
 
 }

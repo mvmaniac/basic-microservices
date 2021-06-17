@@ -1,13 +1,17 @@
 package io.devfactory.web.service;
 
-import io.devfactory.web.dto.MemberDto;
-import io.devfactory.web.dto.MemberMapper;
+import io.devfactory.error.ServiceRuntimeException;
+import io.devfactory.web.domain.Member;
+import io.devfactory.web.dto.record.MemberAndOrdersRecord;
 import io.devfactory.web.repository.MemberRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.UUID;
+
+import static java.util.Collections.emptyList;
 
 @Transactional(readOnly = true)
 @Service
@@ -22,13 +26,20 @@ public class MemberService {
   }
 
   @Transactional
-  public MemberDto saveMember(MemberDto memberDto) {
-    final var member = MemberMapper.INSTANCE.dtoOf(memberDto);
-    member.updateUserId(UUID.randomUUID().toString());
-    member.updatePassword(passwordEncoder.encode(memberDto.getPassword()));
+  public Member saveMember(Member member) {
+    member.updateUniqueId(UUID.randomUUID().toString());
+    member.encryptPassword(passwordEncoder.encode(member.getPassword()));
+    return memberRepository.save(member);
+  }
 
-    final var savedMember = memberRepository.save(member);
-    return MemberMapper.INSTANCE.toDto(savedMember);
+  public MemberAndOrdersRecord findMember(String uniqueId) {
+    final var findMember = memberRepository.findByUniqueId(uniqueId)
+        .orElseThrow(() -> new ServiceRuntimeException("Member not found."));
+    return new MemberAndOrdersRecord(findMember, emptyList());
+  }
+
+  public List<Member> findMembers() {
+    return memberRepository.findAll();
   }
 
 }

@@ -6,13 +6,13 @@ import lombok.Getter;
 @Getter
 public class MemberResponseView {
 
-  private final String userId;
+  private final String uniqueId;
   private final String email;
   private final String name;
 
   @Builder
-  private MemberResponseView(String userId, String email, String name) {
-    this.userId = userId;
+  protected MemberResponseView(String uniqueId, String email, String name) {
+    this.uniqueId = uniqueId;
     this.email = email;
     this.name = name;
   }

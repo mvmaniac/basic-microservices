@@ -21,16 +21,41 @@ spring:
           uri: lb://SERVICE-ORDER
           predicates:
             - Path=/service-order/**
-
-        - id: service-member
-          uri: lb://SERVICE-MEMBER
-          predicates:
-            - Path=/service-member/**
+          filters :
+            - RewritePath=/service-order/(?<segment>.*), /$\{segment}
 
         - id: service-catalog
           uri: lb://SERVICE-CATALOG
           predicates:
             - Path=/service-catalog/**
+          filters :
+            - RewritePath=/service-catalog/(?<segment>.*), /$\{segment}
+
+        - id: service-member
+          uri: lb://SERVICE-MEMBER
+          predicates:
+            - Path=/service-member/login
+            - Method=POST
+          filters:
+            - RemoveRequestHeader=Cookie
+            - RewritePath=/service-member/(?<segment>.*), /$\{segment}
+
+        - id: service-member
+          uri: lb://SERVICE-MEMBER
+          predicates:
+            - Path=/service-member/members
+            - Method=POST
+          filters :
+            - RemoveRequestHeader=Cookie
+            - RewritePath=/service-member/(?<segment>.*), /$\{segment}
+
+        - id: service-member
+          uri: lb://SERVICE-MEMBER
+          predicates:
+            - Path=/service-member/**
+          filters:
+            - RemoveRequestHeader=Cookie
+            - RewritePath=/service-member/(?<segment>.*), /$\{segment}
 
         # 아래부터는 예제용
         - id: first-service

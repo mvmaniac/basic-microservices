@@ -10,19 +10,21 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RequestMapping("/service-catalog/catalogs")
+@RequestMapping("/catalogs")
 @RestController
 public class CatalogApi {
 
   private final CatalogService catalogService;
+  private final CatalogMapper catalogMapper;
 
-  public CatalogApi(CatalogService catalogService) {
+  public CatalogApi(CatalogService catalogService, CatalogMapper catalogMapper) {
     this.catalogService = catalogService;
+    this.catalogMapper = catalogMapper;
   }
 
   @GetMapping
   public ResponseEntity<List<CatalogResponseView>> retrieveCatalogs() {
-    return ResponseEntity.ok(CatalogMapper.INSTANCE.toResponseViews(catalogService.findCatalogs()));
+    return ResponseEntity.ok(catalogMapper.toResponseViews(catalogService.findCatalogs()));
   }
 
 }

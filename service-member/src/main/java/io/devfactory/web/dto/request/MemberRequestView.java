@@ -3,12 +3,14 @@ package io.devfactory.web.dto.request;
 import lombok.Builder;
 import lombok.Getter;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Getter
 public class MemberRequestView {
 
+  @Email
   @NotNull(message = "Email cannot be null")
   @Size(min = 2, message = "Email not be less then 2 characters")
   private final String email;

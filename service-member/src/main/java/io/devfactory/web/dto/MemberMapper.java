@@ -7,15 +7,15 @@ import io.devfactory.web.dto.response.MemberResponseView;
 import io.devfactory.web.dto.response.MemberWithOrdersResponseView;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 
-@Mapper(uses = OrderMapper.class)
+import static org.mapstruct.InjectionStrategy.CONSTRUCTOR;
+
+@Mapper(componentModel = "spring", injectionStrategy = CONSTRUCTOR, uses = OrderMapper.class)
 public interface MemberMapper {
 
-  MemberMapper INSTANCE = Mappers.getMapper(MemberMapper.class);
-
+  @Mapping(target = "uniqueId", ignore = true)
   Member requestViewOf(MemberRequestView requestView);
 
   MemberResponseView toResponseView(Member member);

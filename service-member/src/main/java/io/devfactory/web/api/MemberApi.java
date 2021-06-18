@@ -10,33 +10,35 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("/service-member/members")
+@RequestMapping("/members")
 @RestController
 public class MemberApi {
 
   private final MemberService memberService;
+  private final MemberMapper memberMapper;
 
-  public MemberApi(MemberService memberService) {
+  public MemberApi(MemberService memberService, MemberMapper memberMapper) {
     this.memberService = memberService;
+    this.memberMapper = memberMapper;
   }
 
   @PostMapping
   public ResponseEntity<MemberResponseView> createMember(
       @RequestBody MemberRequestView requestView) {
-    final var memberRecord = memberService.saveMember(MemberMapper.INSTANCE.requestViewOf(requestView));
-    return ResponseEntity.ok(MemberMapper.INSTANCE.toResponseView(memberRecord));
+    final var memberRecord = memberService.saveMember(memberMapper.requestViewOf(requestView));
+    return ResponseEntity.ok(memberMapper.toResponseView(memberRecord));
   }
 
   @GetMapping("/{uniqueId}")
   public ResponseEntity<MemberWithOrdersResponseView> retrieveMember(
       @PathVariable("uniqueId") String uniqueId) {
     final var memberAndOrdersRecord = memberService.findMember(uniqueId);
-    return ResponseEntity.ok(MemberMapper.INSTANCE.recordToView(memberAndOrdersRecord));
+    return ResponseEntity.ok(memberMapper.recordToView(memberAndOrdersRecord));
   }
 
   @GetMapping
   public ResponseEntity<List<MemberResponseView>> retrieveMembers() {
-    return ResponseEntity.ok(MemberMapper.INSTANCE.toResponseViews(memberService.findMembers()));
+    return ResponseEntity.ok(memberMapper.toResponseViews(memberService.findMembers()));
   }
 
 }

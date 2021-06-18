@@ -5,15 +5,17 @@ import io.devfactory.web.dto.request.OrderRequestView;
 import io.devfactory.web.dto.response.OrderResponseView;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 
-@Mapper
+import static org.mapstruct.InjectionStrategy.CONSTRUCTOR;
+
+@Mapper(componentModel = "spring", injectionStrategy = CONSTRUCTOR)
 public interface OrderMapper {
 
-  OrderMapper INSTANCE = Mappers.getMapper(OrderMapper.class);
-
+  @Mapping(target = "uniqueId", ignore = true)
+  @Mapping(target = "totalPrice", ignore = true)
+  @Mapping(target = "memberUniqueId", ignore = true)
   Order requestViewOf(OrderRequestView requestView);
 
   @Mapping(source = "uniqueId", target = "orderUniqueId")

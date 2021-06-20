@@ -11,11 +11,12 @@ spring:
         - eth1*
     gateway:
       default-filters:
-        - name: ExampleGlobalFilter
+        - name: GlobalFilter
           args:
             baseMessage: Spring Cloud Gatweay Global Filter
             preLogger: true
             postLogger: true
+
       routes:
         - id: service-order
           uri: lb://SERVICE-ORDER
@@ -56,6 +57,7 @@ spring:
           filters:
             - RemoveRequestHeader=Cookie
             - RewritePath=/service-member/(?<segment>.*), /$\{segment}
+            - AuthorizationHeaderFilter
 
         # 아래부터는 예제용
         - id: first-service
@@ -88,3 +90,11 @@ eureka:
     fetch-registry: true
     service-url:
       defaultZone: http://localhost:8761/eureka
+
+jwt:
+  token:
+    header: Authorization
+    issuer: basic-microservices
+    expires: 5m
+    refresh-range: 1m
+    client-secret: pKHN+yPrI0Vdgq1gIIKXSTs71ZLM2zQTH0BMV9QlyzPTYT3TH7WAZsDZNT+gqY7CWi/o9jzTaXgMP76PinLg5XU=

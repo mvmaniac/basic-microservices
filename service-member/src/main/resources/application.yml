@@ -50,6 +50,14 @@ eureka:
     service-url:
       defaultZone: http://localhost:8761/eureka
 
+jwt:
+  token:
+    header: Authorization
+    issuer: basic-microservices
+    expires: 5m
+    refresh-range: 1m
+    client-secret: pKHN+yPrI0Vdgq1gIIKXSTs71ZLM2zQTH0BMV9QlyzPTYT3TH7WAZsDZNT+gqY7CWi/o9jzTaXgMP76PinLg5XU=
+
 ---
 spring:
   config:

@@ -2,6 +2,7 @@ package io.devfactory.global.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.devfactory.global.security.jwt.JwtAuthenticationProcessingFilter;
+import io.devfactory.global.security.jwt.JwtTokenProperties;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,6 +22,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
   private final UserDetailsService userDetailsService;
   private final ObjectMapper objectMapper;
+
+  private final JwtTokenProperties jwtTokenProperties;
 
   @Override
   protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -50,7 +53,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Bean
   public JwtAuthenticationProcessingFilter jwtAuthenticationProcessingFilter() throws Exception {
-    return new JwtAuthenticationProcessingFilter(JWT_LOGIN_PROCESSING_URL, authenticationManagerBean(), objectMapper);
+    return new JwtAuthenticationProcessingFilter(JWT_LOGIN_PROCESSING_URL, authenticationManagerBean(), objectMapper, jwtTokenProperties);
   }
 
   @Bean

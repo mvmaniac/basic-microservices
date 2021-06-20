@@ -1,0 +1,28 @@
+{
+  "properties": [
+    {
+      "name": "jwt.token.header",
+      "type": "java.lang.String",
+      "description": "Description for jwt.token.header."
+    },
+    {
+      "name": "jwt.token.issuer",
+      "type": "java.lang.String",
+      "description": "Description for jwt.token.issuer."
+    },
+    {
+      "name": "jwt.token.expires",
+      "type": "java.lang.String",
+      "description": "Description for jwt.token.expires."
+    },
+    {
+      "name": "jwt.token.refresh-range",
+      "type": "java.lang.String",
+      "description": "Description for jwt.token.refresh-range."
+    },
+    {
+      "name": "jwt.token.client-secret",
+      "type": "java.lang.String",
+      "description": "Description for jwt.token.client-secret."
+    }
+  ] }

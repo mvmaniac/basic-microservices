@@ -1,4 +1,4 @@
-package io.devfactory.filter.example;
+package io.devfactory.filter;
 
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
@@ -9,9 +9,9 @@ import reactor.core.publisher.Mono;
 
 @Slf4j
 @Component
-public class ExampleGlobalFilter extends AbstractGatewayFilterFactory<ExampleGlobalFilter.Config> {
+public class GlobalFilter extends AbstractGatewayFilterFactory<GlobalFilter.Config> {
 
-  public ExampleGlobalFilter() {
+  public GlobalFilter() {
     super(Config.class);
   }
 

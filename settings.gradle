@@ -6,4 +6,4 @@ pluginManagement {
 
 rootProject.name = 'basic-microservices'
 
-include 'server-eureka', 'service-member'
+include 'server-eureka', 'server-gateway', 'server-config', 'service-common', 'service-member', 'service-catalog', 'service-order'

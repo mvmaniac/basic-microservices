@@ -1,0 +1,15 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: server-config
+
+  cloud:
+    config:
+      server:
+        git:
+          uri: file://P:\YHS\Dev\Workspace_Git
+          default-label: main
+          search-paths:
+            - basic-microservices

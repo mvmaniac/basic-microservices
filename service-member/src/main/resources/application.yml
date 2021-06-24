@@ -5,12 +5,6 @@ spring:
   application:
     name: service-member
 
-  datasource:
-    url: jdbc:h2:mem:testdb
-    driver-class-name: org.h2.Driver
-    username: sa
-    password:
-
   jpa:
     open-in-view: false
     show-sql: false
@@ -31,7 +25,17 @@ spring:
       settings:
         web-allow-others: true
 
+  # 2.4 이상 bootstrap.yml를 사용하지 않는 경우
+  # config.import가 아닌 bootstrap.yml을 사용하고자 하다면
+  # spring-cloud-starter-bootstrap 의존성이 필요함
+  config:
+    import: configserver:http://localhost:8888/
+
   cloud:
+    config:
+      name: service-member # name을 명시하지 않을 경우 application.name을 따라감
+      profile: dev
+
     inetutils:
       ignored-interfaces: # 두개의 네트워크 인터페이스가 있는 경우 무시할 네트워크 인터페이스 지정
         - eth1*
@@ -39,6 +43,12 @@ spring:
 logging:
   level:
     io.devfactory: debug
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh, health, beans
 
 eureka:
   instance:
@@ -49,14 +59,6 @@ eureka:
     fetch-registry: true # 유레카 레지스트리 정보를 가져옴
     service-url:
       defaultZone: http://localhost:8761/eureka
-
-jwt:
-  token:
-    header: Authorization
-    issuer: basic-microservices
-    expires: 5m
-    refresh-range: 1m
-    client-secret: pKHN+yPrI0Vdgq1gIIKXSTs71ZLM2zQTH0BMV9QlyzPTYT3TH7WAZsDZNT+gqY7CWi/o9jzTaXgMP76PinLg5XU=
 
 ---
 spring:

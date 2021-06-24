@@ -5,11 +5,32 @@ spring:
   application:
     name: server-config
 
+  profiles:
+    group:
+      default: private, native # native로 쓸 경우 추가
+
   cloud:
     config:
       server:
-        git:
-          uri: file://P:\YHS\Dev\Workspace_Git
-          default-label: main
-          search-paths:
-            - basic-microservices
+        native:
+          search-locations:
+            - file:///P:\YHS\Dev\Workspace_Git\basic-microservices
+#        git:
+#          uri: git@github.com:mvmaniac/config.git
+#          uri: file://P:\YHS\Dev\Workspace_Git
+#          ignoreLocalSshSettings: true
+#          default-label: main
+#          search-paths:
+#            - basic-microservices
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, busrefresh

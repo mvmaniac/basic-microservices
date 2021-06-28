@@ -32,7 +32,7 @@ public class MemberApi {
   @GetMapping("/{uniqueId}")
   public ResponseEntity<MemberWithOrdersResponseView> retrieveMember(
       @PathVariable("uniqueId") String uniqueId) {
-    final var memberAndOrdersRecord = memberService.findMember(uniqueId);
+    final var memberAndOrdersRecord = memberService.findMemberWithOrders(uniqueId);
     return ResponseEntity.ok(memberMapper.recordToView(memberAndOrdersRecord));
   }
 

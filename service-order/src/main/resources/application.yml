@@ -31,7 +31,7 @@ spring:
 
   cloud:
     inetutils:
-      ignored-interfaces: # 두개의 네트워크 인터페이스가 있는 경우 무시할 네트워크 인터페이스 지정
+      ignored-interfaces:
         - eth1*
 
 logging:
@@ -40,10 +40,10 @@ logging:
 
 eureka:
   instance:
-    prefer-ip-address: true # 서비스 이름 대신 서비스 IP 주소 등록 (한대의 서버에 하나 이상의 네트워크 인터페이스가 있는 경우 문제가 됨)
+    prefer-ip-address: true
     instance-id: ${spring.cloud.client.hostname}:${spring.application.instance_id:${random.value}}
   client:
-    register-with-eureka: true # 유레카 서비스 등록
-    fetch-registry: true # 유레카 레지스트리 정보를 가져옴
+    register-with-eureka: true
+    fetch-registry: true
     service-url:
       defaultZone: http://localhost:8761/eureka

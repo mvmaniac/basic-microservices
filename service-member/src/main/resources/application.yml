@@ -43,6 +43,7 @@ spring:
 logging:
   level:
     io.devfactory: debug
+    io.devfactory.client: debug # FeignClient 로그 출력
 
 management:
   endpoints:

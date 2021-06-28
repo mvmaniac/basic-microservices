@@ -12,8 +12,8 @@ import static org.mapstruct.InjectionStrategy.CONSTRUCTOR;
 @Mapper(componentModel = "spring", injectionStrategy = CONSTRUCTOR)
 public interface OrderMapper {
 
-  @Mapping(target = "orderId", ignore = true)
-  @Mapping(target = "productId", ignore = true)
+  @Mapping(source = "orderUniqueId", target = "orderId")
+  @Mapping(source = "productUniqueId", target = "productId")
   OrderResponseView recordToView(OrderRecord orderRecord);
 
   List<OrderResponseView> recordsToViews(List<OrderRecord> records);

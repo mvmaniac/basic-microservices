@@ -1,6 +1,11 @@
 dependencies {
   implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+  implementation 'org.springframework.cloud:spring-cloud-starter-config'
   implementation 'org.springframework.boot:spring-boot-starter-web'
+
+  implementation 'org.springframework.kafka:spring-kafka'
+  implementation 'org.apache.kafka:connect-api:2.8.0' // 현재는 사용하지 않음, 사용예제 추가 필요
+  implementation 'org.mariadb.jdbc:mariadb-java-client:2.7.3'
 
   runtimeOnly 'com.h2database:h2'
 }

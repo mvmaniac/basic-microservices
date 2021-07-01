@@ -5,11 +5,18 @@ spring:
   application:
     name: service-member
 
+  sql:
+    init:
+      mode: always
+      platform: mariadb
+      data-locations: classpath:sql/data-${spring.sql.init.platform}.sql
+      schema-locations: classpath:sql/schema-${spring.sql.init.platform}.sql
+
   jpa:
     open-in-view: false
     show-sql: false
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: validate
     properties:
       hibernate:
         format_sql: true
@@ -18,12 +25,6 @@ spring:
   devtools:
     restart.enabled: false
     livereload.enabled: true
-
-  h2:
-    console:
-      enabled: true
-      settings:
-        web-allow-others: true
 
   # 2.4 이상 bootstrap.yml를 사용하지 않는 경우
   # config.import가 아닌 bootstrap.yml을 사용하고자 하다면

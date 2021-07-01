@@ -1,0 +1,1 @@
+insert into tb_member(email, name, password, unique_id) values ('dev1@gmail.com', '개발자1', '{bcrypt}$2a$10$vaolUpzOifC0RHrvDsGcv.ngExKo9AbczjivfiizFAjT9r208dBN.', '9e3d1e25-f20b-4ab1-b6cb-b97862261266');

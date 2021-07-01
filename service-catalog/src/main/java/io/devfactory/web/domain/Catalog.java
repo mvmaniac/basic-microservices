@@ -44,4 +44,8 @@ public class Catalog extends BaseTimeEntity {
     this.productUniqueId = productUniqueId;
   }
 
+  public void updateStock(int quantity) {
+    stock = stock - quantity;
+  }
+
 }

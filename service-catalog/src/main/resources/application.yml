@@ -5,23 +5,18 @@ spring:
   application:
     name: service-catalog
 
-  datasource:
-    url: jdbc:h2:mem:testdb
-    driver-class-name: org.h2.Driver
-    username: sa
-    password:
-
   sql:
     init:
-      platform: h2
+      mode: always
+      platform: mariadb
       data-locations: classpath:sql/data-${spring.sql.init.platform}.sql
+      schema-locations: classpath:sql/schema-${spring.sql.init.platform}.sql
 
   jpa:
-    defer-datasource-initialization: true
     open-in-view: false
     show-sql: false
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: validate
     properties:
       hibernate:
         format_sql: true
@@ -31,14 +26,24 @@ spring:
     restart.enabled: false
     livereload.enabled: true
 
-  h2:
-    console:
-      enabled: true
+  config:
+    import: configserver:http://localhost:8888/
 
   cloud:
+    config:
+      name: service-catalog
+      profile: dev
+
     inetutils:
       ignored-interfaces:
         - eth1*
+
+  kafka:
+    consumer:
+      bootstrap-servers: localhost:9092
+      group-id: consumerGroupId
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
 
 logging:
   level:

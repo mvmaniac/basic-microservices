@@ -41,6 +41,13 @@ spring:
       ignored-interfaces: # 두개의 네트워크 인터페이스가 있는 경우 무시할 네트워크 인터페이스 지정
         - eth1*
 
+  zipkin:
+    base-url: http://localhost:9411
+
+  sleuth:
+    sampler:
+      probability: 1.0
+
 logging:
   level:
     io.devfactory: debug

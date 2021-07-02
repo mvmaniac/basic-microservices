@@ -1,6 +1,5 @@
 package io.devfactory.web.service;
 
-import feign.FeignException;
 import io.devfactory.error.ServiceRuntimeException;
 import io.devfactory.web.client.OrderServiceClient;
 import io.devfactory.web.domain.Member;
@@ -8,6 +7,8 @@ import io.devfactory.web.dto.record.MemberAndOrdersRecord;
 import io.devfactory.web.dto.record.OrderRecord;
 import io.devfactory.web.repository.MemberRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cloud.circuitbreaker.resilience4j.Resilience4JCircuitBreakerFactory;
+import org.springframework.cloud.client.circuitbreaker.CircuitBreakerFactory;
 import org.springframework.core.env.Environment;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -31,14 +32,18 @@ public class MemberService {
   private final PasswordEncoder passwordEncoder;
   private final MemberRepository memberRepository;
 
+  private final CircuitBreakerFactory circuitBreakerFactory;
+
   public MemberService(Environment environment, RestTemplate restTemplate,
       OrderServiceClient orderServiceClient, PasswordEncoder passwordEncoder,
-      MemberRepository memberRepository) {
+      MemberRepository memberRepository,
+      CircuitBreakerFactory circuitBreakerFactory) {
     this.environment = environment;
     this.restTemplate = restTemplate;
     this.orderServiceClient = orderServiceClient;
     this.passwordEncoder = passwordEncoder;
     this.memberRepository = memberRepository;
+    this.circuitBreakerFactory = circuitBreakerFactory;
   }
 
   @Transactional
@@ -64,18 +69,28 @@ public class MemberService {
 //    final var orders = orderResponse.getBody();
 
     // FeignClient 사용
-    List<OrderRecord> orders = emptyList();
+//    List<OrderRecord> orders = emptyList();
+//
+//    try {
+//      // order 에서 예외가 발생하더라도 회원정보는 내주기 위해 예외처리 함
+//      // 만약 order 정보도 필수로 나와야 한다면 예외처리를 제거하고 FeignErrorDecoder 처리
+//      orders = orderServiceClient.retrieveOrders(uniqueId);
+//    } catch (FeignException e) {
+//      log.error("MemberService.findMemberWithOrders.FeignException: {}", e.getMessage(), e);
+//    }
 
-    try {
-      // order 에서 예외가 발생하더라도 회원정보는 내주기 위해 예외처리 함
-      // 만약 order 정보도 필수로 나와야 한다면 예외처리를 제거하고 FeignErrorDecoder 처리
-      orders = orderServiceClient.retrieveOrders(uniqueId);
-    } catch (FeignException e) {
-      log.error("MemberService.findMemberWithOrders.FeignException: {}", e.getMessage(), e);
-    }
+    log.info("Before call orders microservice");
+
+    // FeignClient + CircuitBreaker 사용
+  final var circuitBreaker = circuitBreakerFactory.create("circuit-breaker");
+  final List<OrderRecord> orders = circuitBreaker.run(
+      () -> orderServiceClient.retrieveOrders(uniqueId),
+      throwable -> emptyList());
+
+    log.info("After call orders microservice");
 
     return new MemberAndOrdersRecord(findMember, orders);
-  }
+}
 
   public List<Member> findMembers() {
     return memberRepository.findAll();

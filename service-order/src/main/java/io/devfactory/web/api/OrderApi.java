@@ -6,6 +6,7 @@ import io.devfactory.web.dto.OrderMapper;
 import io.devfactory.web.dto.request.OrderRequestView;
 import io.devfactory.web.dto.response.OrderResponseView;
 import io.devfactory.web.service.OrderService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +14,7 @@ import java.util.List;
 
 import static org.springframework.http.HttpStatus.CREATED;
 
+@Slf4j
 @RestController
 public class OrderApi {
 
@@ -36,6 +38,8 @@ public class OrderApi {
       @PathVariable("memberUniqueId") String memberUniqueId,
       @RequestBody OrderRequestView requestView) {
 
+    log.info("Before add order data");
+
     // use jpa
     // final var savedOrder = orderService.saveOrder(memberUniqueId, orderMapper.requestViewOf(requestView));
     // final var orderResponseView = orderMapper.toResponseView(savedOrder);
@@ -56,7 +60,11 @@ public class OrderApi {
   @GetMapping("/{memberUniqueId}/orders")
   public ResponseEntity<List<OrderResponseView>> retrieveOrders(
       @PathVariable("memberUniqueId") String memberUniqueId) {
+
+    log.info("Before retrieve order data");
     final var findOrders = orderService.findOrders(memberUniqueId);
+    log.info("Before retrieve order data");
+
     return ResponseEntity.ok(orderMapper.toResponseViews(findOrders));
   }
 

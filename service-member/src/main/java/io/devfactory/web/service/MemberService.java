@@ -6,8 +6,8 @@ import io.devfactory.web.domain.Member;
 import io.devfactory.web.dto.record.MemberAndOrdersRecord;
 import io.devfactory.web.dto.record.OrderRecord;
 import io.devfactory.web.repository.MemberRepository;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.cloud.circuitbreaker.resilience4j.Resilience4JCircuitBreakerFactory;
 import org.springframework.cloud.client.circuitbreaker.CircuitBreakerFactory;
 import org.springframework.core.env.Environment;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -82,15 +82,16 @@ public class MemberService {
     log.info("Before call orders microservice");
 
     // FeignClient + CircuitBreaker 사용
-  final var circuitBreaker = circuitBreakerFactory.create("circuit-breaker");
-  final List<OrderRecord> orders = circuitBreaker.run(
-      () -> orderServiceClient.retrieveOrders(uniqueId),
-      throwable -> emptyList());
+    // 직접 함수 호출 하는 방식, 어노테이션으로도 사용할 수 있음 @CircuitBreaker
+    final var circuitBreaker = circuitBreakerFactory.create("circuit-breaker");
+    final List<OrderRecord> orders = circuitBreaker.run(
+        () -> orderServiceClient.retrieveOrders(uniqueId),
+        throwable -> emptyList());
 
     log.info("After call orders microservice");
 
     return new MemberAndOrdersRecord(findMember, orders);
-}
+  }
 
   public List<Member> findMembers() {
     return memberRepository.findAll();

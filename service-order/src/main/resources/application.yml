@@ -54,6 +54,12 @@ logging:
   level:
     io.devfactory: debug
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh, health, beans, info, metrics, prometheus
+
 eureka:
   instance:
     prefer-ip-address: true

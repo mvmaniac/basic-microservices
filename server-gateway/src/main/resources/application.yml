@@ -32,6 +32,15 @@ spring:
           filters :
             - RewritePath=/service-order/(?<segment>.*), /$\{segment}
 
+        - id : service-order
+          uri : lb://SERVICE-ORDER
+          predicates :
+            - Path=/service-order/actuator/**
+            - Method=GET,POST
+          filters :
+            - RemoveRequestHeader=Cookie
+            - RewritePath=/service-order/(?<segment>.*), /$\{segment}
+
         - id: service-catalog
           uri: lb://SERVICE-CATALOG
           predicates:
@@ -102,7 +111,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: refresh, health, beans, httptrace, busrefresh
+        include: refresh, health, beans, httptrace, busrefresh, info, metrics, prometheus
 
 eureka:
   instance:

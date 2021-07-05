@@ -1,5 +1,6 @@
 package io.devfactory.web.api;
 
+import io.micrometer.core.annotation.Timed;
 import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,6 +14,7 @@ public class MemberHealthCheckApi {
     this.environment = environment;
   }
 
+  @Timed(value = "member.health.check", longTask = true)
   @GetMapping("/health-check")
   public String statusA() {
     // environment로 설정 파일 값을 가지고 와야 변경된 설정 파일 값을 동적으로 읽을 수 있을 듯?

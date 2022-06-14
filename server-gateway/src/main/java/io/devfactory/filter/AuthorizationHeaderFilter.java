@@ -85,19 +85,13 @@ public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory<Auth
 
     var token = headers.get(0);
 
-    try {
-      token = URLDecoder.decode(token, StandardCharsets.UTF_8.name());
+    token = URLDecoder.decode(token, StandardCharsets.UTF_8);
 
-      if (!token.startsWith(BEARER)) {
-        return null;
-      }
-      return token.replace(BEARER, "");
-
-    } catch (UnsupportedEncodingException e) {
-      log.error(e.getMessage(), e);
+    if (!token.startsWith(BEARER)) {
+      return null;
     }
 
-    return null;
+    return token.replace(BEARER, "");
   }
 
   @Getter

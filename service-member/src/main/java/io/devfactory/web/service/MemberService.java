@@ -6,7 +6,6 @@ import io.devfactory.web.domain.Member;
 import io.devfactory.web.dto.record.MemberAndOrdersRecord;
 import io.devfactory.web.dto.record.OrderRecord;
 import io.devfactory.web.repository.MemberRepository;
-import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.client.circuitbreaker.CircuitBreakerFactory;
 import org.springframework.core.env.Environment;

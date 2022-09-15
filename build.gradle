@@ -1,6 +1,6 @@
 plugins {
-  id 'org.springframework.boot' version '2.4.5'
-  id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+  id 'org.springframework.boot' version '2.7.5'
+  id 'io.spring.dependency-management' version '1.0.15.RELEASE'
   id 'java'
 }
 
@@ -11,15 +11,15 @@ allprojects {
 
   group = 'io.devfactory'
   version = '0.0.1'
-  sourceCompatibility = JavaVersion.VERSION_16
-  targetCompatibility = JavaVersion.VERSION_16
+  sourceCompatibility = JavaVersion.VERSION_18
+  targetCompatibility = JavaVersion.VERSION_18
 
   repositories {
     mavenCentral()
   }
 
   ext {
-    set('springCloudVersion', '2020.0.2')
+    set('springCloudVersion', '2021.0.4')
   }
 
   configurations {
@@ -29,23 +29,29 @@ allprojects {
   }
 
   dependencies {
+    implementation 'org.mapstruct:mapstruct:1.5.2.Final'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.2.Final'
+
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
     testCompileOnly 'org.projectlombok:lombok'
     testAnnotationProcessor 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
   }
 
-  test {
+  tasks.named('test') {
     useJUnitPlatform()
   }
 
   bootRun {
     if (project.hasProperty('args')) {
+      //noinspection GroovyAssignabilityCheck
       args project.args.split(',') as String[]
     }
     systemProperties = System.properties as Map<String, ?>
@@ -54,6 +60,9 @@ allprojects {
 
 subprojects {
   dependencies {
+    if (project.name.startsWith('service') && project.name != 'service-common') {
+      implementation project(':service-common')
+    }
     implementation 'org.apache.commons:commons-lang3:3.12.0'
   }
 

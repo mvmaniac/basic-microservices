@@ -3,7 +3,6 @@ package io.devfactory.config.jwt;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.context.properties.ConstructorBinding;
 import org.springframework.boot.convert.DurationUnit;
 
 import java.time.Duration;
@@ -12,7 +11,6 @@ import static java.time.temporal.ChronoUnit.MINUTES;
 
 @AllArgsConstructor
 @Getter
-@ConstructorBinding
 @ConfigurationProperties("jwt.token")
 public class JwtTokenProperties {
 

@@ -9,11 +9,11 @@
 
 ### 2. 차이점
 
-- Spring Boot 2, Gradle 7 기반
+- Spring Boot 3, Gradle 8 기반
 
 ### 3. TODO
 
-- 최신 버전으로 테스트 필요...
+- Spring Boot 3 버전에서 테스트 필요
 - JwtTokenProperties 설정 파일을 Environment로 변경 (Config 변경 시 적용이 되기 위해...)
 
 ### 4. 참고

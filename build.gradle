@@ -1,6 +1,6 @@
 plugins {
-  id 'org.springframework.boot' version '2.7.5'
-  id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+  id 'org.springframework.boot' version '3.1.0'
+  id 'io.spring.dependency-management' version '1.1.0'
   id 'java'
 }
 
@@ -11,15 +11,15 @@ allprojects {
 
   group = 'io.devfactory'
   version = '0.0.1'
-  sourceCompatibility = JavaVersion.VERSION_18
-  targetCompatibility = JavaVersion.VERSION_18
+  sourceCompatibility = JavaVersion.VERSION_19
+  targetCompatibility = JavaVersion.VERSION_19
 
   repositories {
     mavenCentral()
   }
 
   ext {
-    set('springCloudVersion', '2021.0.4')
+    set('springCloudVersion', '2022.0.2')
   }
 
   configurations {
@@ -29,8 +29,8 @@ allprojects {
   }
 
   dependencies {
-    implementation 'org.mapstruct:mapstruct:1.5.2.Final'
-    annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.2.Final'
+    implementation 'org.mapstruct:mapstruct:1.5.5.Final'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
 
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
@@ -47,6 +47,10 @@ allprojects {
 
   tasks.named('test') {
     useJUnitPlatform()
+  }
+
+  tasks.named('compileJava') {
+    inputs.files(tasks.named('processResources'))
   }
 
   bootRun {

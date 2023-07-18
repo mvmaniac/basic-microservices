@@ -1,6 +1,6 @@
 plugins {
-  id 'org.springframework.boot' version '3.1.0'
-  id 'io.spring.dependency-management' version '1.1.0'
+  id 'org.springframework.boot' version '3.2.1'
+  id 'io.spring.dependency-management' version '1.1.4'
   id 'java'
 }
 
@@ -11,15 +11,18 @@ allprojects {
 
   group = 'io.devfactory'
   version = '0.0.1'
-  sourceCompatibility = JavaVersion.VERSION_19
-  targetCompatibility = JavaVersion.VERSION_19
+
+  java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+  }
 
   repositories {
     mavenCentral()
   }
 
   ext {
-    set('springCloudVersion', '2022.0.2')
+    set('springCloudVersion', '2022.0.3')
   }
 
   configurations {
@@ -67,7 +70,7 @@ subprojects {
     if (project.name.startsWith('service') && project.name != 'service-common') {
       implementation project(':service-common')
     }
-    implementation 'org.apache.commons:commons-lang3:3.12.0'
+    implementation 'org.apache.commons:commons-lang3:3.14.0'
   }
 
   dependencyManagement {
